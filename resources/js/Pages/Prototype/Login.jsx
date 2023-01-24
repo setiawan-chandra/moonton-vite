@@ -1,5 +1,7 @@
 import InputLabel from "@/Components/InputLabel";
+import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
+import { Link } from "@inertiajs/inertia-react";
 import React from "react";
 
 export default function Login() {
@@ -48,22 +50,23 @@ export default function Login() {
                             </div>
                         </div>
                         <div className="grid space-y-[14px] mt-[30px]">
-                            <a
-                                href="/"
-                                className="rounded-2xl bg-alerange py-[13px] text-center"
-                            >
-                                <span className="text-base font-semibold">
-                                    Start Watching
-                                </span>
-                            </a>
-                            <a
-                                href="sign_up.html"
-                                className="rounded-2xl border border-white py-[13px] text-center"
-                            >
-                                <span className="text-base text-white">
-                                    Create New Account
-                                </span>
-                            </a>
+                            <Link href="/">
+                                <PrimaryButton type="button">
+                                    <span className="text-base font-semibold">
+                                        Start Watching
+                                    </span>
+                                </PrimaryButton>
+                            </Link>
+                            <Link href={route("prototype.register")}>
+                                <PrimaryButton
+                                    type="button"
+                                    variant="light-outline"
+                                >
+                                    <span className="text-base text-white">
+                                        Create New Account
+                                    </span>
+                                </PrimaryButton>
+                            </Link>
                         </div>
                     </form>
                 </div>
