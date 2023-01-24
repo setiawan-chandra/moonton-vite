@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.flex::before,
+.flex::after {
+    display: none !important;
+}
