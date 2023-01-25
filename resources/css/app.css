@@ -1,5 +1,6 @@
 @import "input.css";
 @import "button.css";
+@import "sidebar.css";
 
 @tailwind base;
 @tailwind components;
