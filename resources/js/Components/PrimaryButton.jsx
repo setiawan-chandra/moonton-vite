@@ -7,7 +7,7 @@ PrimaryButton.propTypes = {
         "primary",
         "warning",
         "danger",
-        "outline-light",
+        "light-outline",
         "outline-white",
     ]),
     className: PropTypes.string,
