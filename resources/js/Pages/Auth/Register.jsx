@@ -1,9 +1,9 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import InputLabel from "@/Components/InputLabel";
 import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
-import { Head, Link, useForm } from "@inertiajs/inertia-react";
 import InputError from "@/Components/InputError";
+import { Head, Link, useForm } from "@inertiajs/inertia-react";
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -137,7 +137,7 @@ export default function Register() {
                                         Sign Up
                                     </span>
                                 </PrimaryButton>
-                                <Link href={route("prototype.login")}>
+                                <Link href={route("login")}>
                                     <PrimaryButton variant="light-outline">
                                         <span className="text-base text-white">
                                             Sign In to My Account
