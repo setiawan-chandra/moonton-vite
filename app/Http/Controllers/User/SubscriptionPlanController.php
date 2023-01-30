@@ -15,4 +15,9 @@ class SubscriptionPlanController extends Controller
             'subscriptionPlans' => SubscriptionPlan::all(),
         ]);
     }
+
+    public function userSubscribe(Request $request, SubscriptionPlan $subscriptionPlan)
+    {
+        return $subscriptionPlan;
+    }
 }

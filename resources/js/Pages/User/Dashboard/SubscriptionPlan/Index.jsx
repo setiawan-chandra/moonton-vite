@@ -1,7 +1,15 @@
 import Authenticated from "@/Layouts/Authenticated/Index";
 import SubscriptionCard from "@/Components/SubscriptionCard";
+import { Inertia } from "@inertiajs/inertia";
 
 export default function SubscriptionPlan({ auth, subscriptionPlans }) {
+    const selectSubscription = (id) => {
+        Inertia.post(
+            route("user.dashboard.subscriptionPlan.userSubscribe", {
+                subscriptionPlan: id,
+            })
+        );
+    };
     return (
         <Authenticated auth={auth}>
             <div className="py-20 flex flex-col items-center">
@@ -14,16 +22,19 @@ export default function SubscriptionPlan({ auth, subscriptionPlans }) {
                 </p>
                 {/* Pricing Card */}
                 <div className="flex justify-center gap-10 mt-[70px]">
-                    {subscriptionPlans.map((subscriptionPlans) => (
+                    {subscriptionPlans.map((subscriptionPlan) => (
                         <SubscriptionCard
-                            name={subscriptionPlans.name}
-                            price={subscriptionPlans.price}
+                            name={subscriptionPlan.name}
+                            price={subscriptionPlan.price}
                             durationInMonth={
-                                subscriptionPlans.active_period_in_months
+                                subscriptionPlan.active_period_in_months
                             }
-                            features={JSON.parse(subscriptionPlans.features)}
-                            isPremium={subscriptionPlans.name === "Premium"}
-                            key={subscriptionPlans.id}
+                            features={JSON.parse(subscriptionPlan.features)}
+                            isPremium={subscriptionPlan.name === "Premium"}
+                            key={subscriptionPlan.id}
+                            onSelectSubscription={() =>
+                                selectSubscription(subscriptionPlan.id)
+                            }
                         />
                     ))}
                 </div>
