@@ -1,3 +1,4 @@
+import SubscriptionDetail from "@/Layouts/Authenticated/SubscriptionDetail";
 import { Link } from "@inertiajs/inertia-react";
 
 export default function Sidebar() {
@@ -160,8 +161,10 @@ export default function Sidebar() {
                     </div>
                     {/* End Others */}
 
+                    <SubscriptionDetail />
+
                     {/* Start Subscription details */}
-                    <div className="mt-auto pr-[30px]">
+                    {/* <div className="mt-auto pr-[30px]">
                         <div className="p-5 bg-black rounded-[25px]">
                             <img src="/icons/ic_star-rounded.svg" alt="" />
                             <div className="text-white text-lg font-semibold mt-4 mb-8">
@@ -174,7 +177,7 @@ export default function Sidebar() {
                                 <div className="rounded-full h-full w-9/12 bg-alerange"></div>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                     {/* End Subscription details */}
                 </div>
             </div>
