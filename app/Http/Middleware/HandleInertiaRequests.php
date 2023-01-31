@@ -36,8 +36,8 @@ class HandleInertiaRequests extends Middleware
      */
 
     private function activePlan(){
-        $activePlan = Auth::user() ? Auth::user()->LastActiveSubcription : null;
-        if(!activePlan){
+        $activePlan = Auth::user() ? Auth::user()->LastActiveUserSubscription : null;
+        if(!$activePlan){
             return null;
         }
 
@@ -57,6 +57,7 @@ class HandleInertiaRequests extends Middleware
         return array_merge(parent::share($request), [
             'auth' => [
                 'user' => $request->user(),
+                'activePlan' => $this->activePlan(),
             ],
             'ziggy' => function () use ($request) {
                 return array_merge((new Ziggy)->toArray(), [
