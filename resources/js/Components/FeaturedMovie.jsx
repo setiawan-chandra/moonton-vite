@@ -51,7 +51,7 @@ rounded-br-[28px] flex justify-between items-center px-7 h-[130px]"
                 </div>
             </div>
             <Link
-                href={route("prototype.movie.show", slug)}
+                href={route("user.dashboard.movie.show", slug)}
                 className="inset-0 absolute z-50"
             ></Link>
         </div>
