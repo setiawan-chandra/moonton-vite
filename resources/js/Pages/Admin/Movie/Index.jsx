@@ -1,8 +1,9 @@
 import Authenticated from "@/Layouts/Authenticated/Index";
 import PrimaryButton from "@/Components/PrimaryButton";
+import FlashMessage from "@/Components/FlashMessage";
 import { Link } from "@inertiajs/inertia-react";
 
-export default function Index({ auth }) {
+export default function Index({ auth, flashMessage }) {
     return (
         <Authenticated auth={auth}>
             <Link href={route("admin.dashboard.movie.create")}>
@@ -10,6 +11,9 @@ export default function Index({ auth }) {
                     Insert New Movie
                 </PrimaryButton>
             </Link>
+            {flashMessage?.message && (
+                <FlashMessage message={flashMessage.message} />
+            )}
         </Authenticated>
     );
 }
