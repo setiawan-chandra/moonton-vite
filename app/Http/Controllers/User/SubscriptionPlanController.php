@@ -62,4 +62,60 @@ class SubscriptionPlanController extends Controller
             'userSubscription' => $userSubscription,
         ]);
     }
+    
+    public function midtransCallback(Request $request)
+    {
+        $notif = new Midtrans\Notification();
+
+        $transaction_status = $notif->transaction_status;
+        $fraud = $notif->fraud_status;
+
+        $transaction_id = explode('-', $notif->order_id)[0];
+        $userSubscription = UserSubscription::find($transaction_id);
+
+        if ($transaction_status == 'capture') {
+            if ($fraud == 'challenge') {
+                // TODO Set payment status in merchant's database to 'challenge'
+                $userSubscription->payment_status = 'pending';
+            }
+            else if ($fraud == 'accept') {
+                // TODO Set payment status in merchant's database to 'success'
+                $userSubscription->payment_status = 'paid';
+                $userSubscription->expired_date = Carbon::now()->addMonths((int) $userSubscription->subscriptionPlan->active_period_in_months);
+            }
+        }
+        else if ($transaction_status == 'cancel') {
+            if ($fraud == 'challenge') {
+                // TODO Set payment status in merchant's database to 'failure'
+                $userSubscription->payment_status = 'failed';
+            }
+            else if ($fraud == 'accept') {
+                // TODO Set payment status in merchant's database to 'failure'
+                $userSubscription->payment_status = 'failed';
+            }
+        }
+        else if ($transaction_status == 'deny') {
+            // TODO Set payment status in merchant's database to 'failure'
+            $userSubscription->payment_status = 'failed';
+        }
+        else if ($transaction_status == 'settlement') {
+            // TODO set payment status in merchant's database to 'Settlement'
+            $userSubscription->payment_status = 'paid';
+            $userSubscription->expired_date = Carbon::now()->addMonths((int) $userSubscription->subscriptionPlan->active_period_in_months);
+        }
+        else if ($transaction_status == 'pending') {
+            // TODO set payment status in merchant's database to 'Pending'
+            $userSubscription->payment_status = 'pending';
+        }
+        else if ($transaction_status == 'expire') {
+            // TODO set payment status in merchant's database to 'expire'
+            $userSubscription->payment_status = 'failed';
+        }
+
+        $userSubscription->save();
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Payment success'
+        ]);
+    }
 }

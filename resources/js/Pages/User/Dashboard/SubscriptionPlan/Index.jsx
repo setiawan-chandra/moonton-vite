@@ -23,7 +23,7 @@ export default function SubscriptionPlan({ auth, subscriptionPlans, env }) {
         snap.pay(userSubscription.snap_token, {
             // Optional
             onSuccess: function (result) {
-                console.log({ result });
+                Inertia.visit(route("user.dashboard.index"));
             },
             // Optional
             onPending: function (result) {
