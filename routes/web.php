@@ -19,13 +19,15 @@ use App\Http\Controllers\admin\MovieController as AdminMovieController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// MIDTRANS ROUTE
+Route::post('midtrans/notification', [SubscriptionPlanController::class, 'midtransCallback']);
 
 Route::redirect('/', '/login');
 
 Route::middleware(['auth', 'role:user'])->prefix('dashboard')->name('user.dashboard.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('index');
     
-    Route::get('/movie/{movie:slug}', [MovieController::class, 'show'])->name('movie.show')->middleware('checkUserSubscription:true');
+    Route::get('movie/{movie:slug}', [MovieController::class, 'show'])->name('movie.show')->middleware('checkUserSubscription:true');
 
     Route::get('subscription-plan', [SubscriptionPlanController::class, 'index'])->name('subscriptionPlan.index')->middleware('checkUserSubscription:false');
     Route::post('subscription-plan/{subscriptionPlan}/user-subscribe', [SubscriptionPlanController::class, 'userSubscribe'])->name('subscriptionPlan.userSubscribe')->middleware('checkUserSubscription:false');
@@ -53,7 +55,7 @@ Route::prefix('prototype')->name('prototype.')->group(function () {
         return Inertia::render('Prototype/SubscriptionPlan');
     })->name('subscriptionPlan');
 
-    route::get('/movie/slug', function () {
+    route::get('/movie/{slug}', function () {
         return Inertia::render('Prototype/Movie/Show');
     })->name('movie.show');
 });
