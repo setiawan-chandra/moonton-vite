@@ -22,3 +22,4 @@ Moonton is a project to build a streaming movie platform like Netflix which uses
 8.  Run syntax "npm install"
 9.  Run syntax "php artisan migrate"
 10. Run syntax "php artisan db:seed"
+11. Run syntax "php artisan key:generate"
